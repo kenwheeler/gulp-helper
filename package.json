@@ -3,7 +3,7 @@
   "main": "./lib/gulp-helper",
   "version": "0.1.0",
   "private": true,
-  "description": "Runs grunt watch on your project directory and displays the output!",
+  "description": "Runs gulp watch on your project directory and displays the output!",
   "activationEvents": [
     "gulp-helper:toggle"
   ],
