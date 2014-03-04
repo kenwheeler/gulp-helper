@@ -1,7 +1,7 @@
 {
   "name": "gulp-helper",
   "main": "./lib/gulp-helper",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "private": true,
   "description": "Runs gulp watch on your project directory and displays the output!",
   "activationEvents": [
