@@ -8,4 +8,4 @@ This package runs gulp watch on your current directory and shows an output panel
 
 Preview:
 
-![Preview](http://i.imgur.com/1arbOuo.png)
+![Preview](http://i.imgur.com/eny7WWM.gif)
