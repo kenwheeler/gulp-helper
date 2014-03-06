@@ -7,7 +7,7 @@
   "activationEvents": [
     "gulp-helper:toggle"
   ],
-  "repository": "https://github.com/kenwheeler/gulp-helper",
+  "repository": "https://github.com/timhuff/gulp-helper",
   "license": "MIT",
   "engines": {
     "atom": ">0.50.0"

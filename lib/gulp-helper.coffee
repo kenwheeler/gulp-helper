@@ -1,6 +1,9 @@
 GulpHelperView = require './gulp-helper-view'
 
 module.exports =
+  configDefaults:
+    useCoffeeGulp: false
+
   gulpHelperView: null
 
   activate: (state) ->
