@@ -3,6 +3,7 @@ GulpHelperView = require './gulp-helper-view'
 module.exports =
   configDefaults:
     useCoffeeGulp: false
+    args: 'watch'
 
   gulpHelperView: null
 
