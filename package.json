@@ -13,6 +13,7 @@
     "atom": ">0.50.0"
   },
   "dependencies": {
-    "ansi-to-html": "~0.1.1"
+    "ansi-to-html": "~0.1.1",
+    "which": "~1.0.5"
   }
 }

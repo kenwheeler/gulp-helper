@@ -1,6 +1,7 @@
 {View} = require 'atom'
 {BufferedProcess} = require 'atom'
 Convert = require 'ansi-to-html'
+which = require('which').sync
 converter = new Convert()
 module.exports =
 class GulpHelperView extends View
@@ -32,9 +33,9 @@ class GulpHelperView extends View
   runGulp: ->
     if atom.project.getPath()
       atom.workspaceView.find('.gulp-helper .panel-body').html('')
-      command = '/usr/local/bin/gulp'
+      command = which('gulp')
       if atom.config.get('gulp-helper.useCoffeeGulp')
-          command = '/usr/local/bin/coffeegulp'
+          command = which('coffeegulp')
       args = ['watch']
       options = {
           cwd: atom.project.getPath()
