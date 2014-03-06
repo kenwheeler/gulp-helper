@@ -7,12 +7,13 @@
   "activationEvents": [
     "gulp-helper:toggle"
   ],
-  "repository": "https://github.com/kenwheeler/gulp-helper",
+  "repository": "https://github.com/timhuff/gulp-helper",
   "license": "MIT",
   "engines": {
     "atom": ">0.50.0"
   },
   "dependencies": {
-    "ansi-to-html": "~0.1.1"
+    "ansi-to-html": "~0.1.1",
+    "which": "~1.0.5"
   }
 }
