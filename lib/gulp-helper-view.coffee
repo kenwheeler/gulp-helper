@@ -33,9 +33,11 @@ class GulpHelperView extends View
     if atom.project.getPath()
       atom.workspaceView.find('.gulp-helper .panel-body').html('')
       command = '/usr/local/bin/gulp'
-      args = ['watch']
+      if atom.config.get('gulp-helper.useCoffeeGulp')
+          command = '/usr/local/bin/coffeegulp'
+      args = atom.config.get('gulp-helper.args').split(' ')
       options = {
-          cwd: atom.project.getPath()
+          cwd: atom.config.get('gulp-helper.gulpfileDirectory')
       }
       stdout = @gulpOut
       stderr = @gulpErr
