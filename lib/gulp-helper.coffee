@@ -4,6 +4,7 @@ module.exports =
   configDefaults:
     useCoffeeGulp: false
     args: 'watch'
+    gulpfileDirectory: atom.project.getPath()
 
   gulpHelperView: null
 

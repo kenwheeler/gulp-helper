@@ -37,7 +37,7 @@ class GulpHelperView extends View
           command = '/usr/local/bin/coffeegulp'
       args = atom.config.get('gulp-helper.args').split(' ')
       options = {
-          cwd: atom.project.getPath()
+          cwd: atom.config.get('gulp-helper.gulpfileDirectory')
       }
       stdout = @gulpOut
       stderr = @gulpErr
