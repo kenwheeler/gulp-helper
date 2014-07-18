@@ -47,8 +47,9 @@ class GulpHelperView extends View
     gulpHelper.scrollTop(gulpHelper[0].scrollHeight)
 
   gulpOut: (output) =>
-    stream = converter.toHtml(output);
-    atom.workspaceView.find('.gulp-helper .panel-body').append "<div class='text-highighted'>#{stream}</div>"
+    for line in output.split("\n")
+      stream = converter.toHtml(line);
+      atom.workspaceView.find('.gulp-helper .panel-body').append "<div class='text-highighted'>#{stream}</div>"
     @setScroll()
 
   gulpErr: (code) =>
