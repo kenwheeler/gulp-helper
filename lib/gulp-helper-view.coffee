@@ -32,7 +32,7 @@ class GulpHelperView extends View
   runGulp: ->
     if atom.project.getPath()
       atom.workspaceView.find('.gulp-helper .panel-body').html('')
-      command = '/usr/local/bin/gulp'
+      command = if process.platform = 'win32' then 'gulp' else '/usr/local/bin/gulp'
       args = ['--color', 'watch']
       options = {
           cwd: atom.project.getPath()
