@@ -56,7 +56,7 @@ class GulpHelperView extends View
     gulpHelper.scrollTop(gulpHelper[0].scrollHeight)
 
   gulpOut: (output, projectPath) =>
-    for line in output.split("\n")
+    for line in output.split("\n").filter((lineRaw) -> lineRaw isnt '')
       stream = converter.toHtml(line);
       atom.workspaceView.find('.gulp-helper .panel-body').append "<div class='text-highighted'><span class='folder-name'>#{projectPath}</span> #{stream}</div>"
     @setScroll()
