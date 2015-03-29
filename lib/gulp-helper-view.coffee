@@ -4,7 +4,9 @@ Convert = require 'ansi-to-html'
 converter = new Convert()
 module.exports =
 class GulpHelperView extends View
-  @process: null
+  processes = {}
+  command = if process.platform == 'win32' then 'gulp' else '/usr/local/bin/gulp'
+  args = ['--color', 'watch']
   @content: ->
     @div class: "gulp-helper tool-panel panel-bottom", =>
       @div class: "panel-heading affix", 'Gulp Output'
@@ -23,39 +25,46 @@ class GulpHelperView extends View
   toggle: ->
     if @hasParent()
       @detach()
-      if @process
-        @process.kill()
+      # Kill all gulp processes
+      for projectPath, process of processes
+        if process
+          process.kill()
     else
       atom.workspaceView.prependToBottom(this)
       @runGulp()
 
   runGulp: ->
-    if atom.project.getPath()
-      atom.workspaceView.find('.gulp-helper .panel-body').html('')
-      command = if process.platform == 'win32' then 'gulp' else '/usr/local/bin/gulp'
-      args = ['--color', 'watch']
-      options = {
-          cwd: atom.project.getPath()
-      }
-      stdout = @gulpOut
-      stderr = @gulpErr
-      exit = @gulpErr
-      @process = new BufferedProcess({command, args, options, stdout, stderr, exit})
+    #Clear our console
+    atom.workspaceView.find('.gulp-helper .panel-body').html('')
+    # Run gulp for each root folder open
+    for projectPath in atom.project.getPaths()
+      do (projectPath) =>
+        options = {
+            cwd: projectPath
+        }
+        # Get root folder name as displayed by Atom (i.e. last segment of path)
+        projectPathName = projectPath.split(path.sep).filter((path) -> path isnt '').pop()
+        # Make sure output knows which root folder the output/error was caused in
+        stdout = (output) => @gulpOut(output, projectPathName)
+        stderr = (code) => @gulpErr(code, projectPathName)
+        exit = (code) => @gulpErr(code, projectPathName)
+        # Run process and store in cache so we can exit later
+        processes[projectPath] = new BufferedProcess({command, args, options, stdout, stderr, exit})
 
   setScroll: ->
     gulpHelper = atom.workspaceView.find('.gulp-helper')
     gulpHelper.scrollTop(gulpHelper[0].scrollHeight)
 
-  gulpOut: (output) =>
+  gulpOut: (output, projectPath) =>
     for line in output.split("\n")
       stream = converter.toHtml(line);
-      atom.workspaceView.find('.gulp-helper .panel-body').append "<div class='text-highighted'>#{stream}</div>"
+      atom.workspaceView.find('.gulp-helper .panel-body').append "<div class='text-highighted'><span class='folder-name'>#{projectPath}</span> #{stream}</div>"
     @setScroll()
 
-  gulpErr: (code) =>
-    atom.workspaceView.find('.gulp-helper .panel-body').append "<div class='text-error'>Error Code: #{code}</div>"
+  gulpErr: (code, projectPath) =>
+    atom.workspaceView.find('.gulp-helper .panel-body').append "<div class='text-error'><span class='folder-name'>#{projectPath}</span> Error Code: #{code}</div>"
     @setScroll()
 
-  gulpExit: (code) =>
-    atom.workspaceView.find('.gulp-helper .panel-body').append "<div class='text-error'>Exited with error code: #{code}</div>"
+  gulpExit: (code, projectPath) =>
+    atom.workspaceView.find('.gulp-helper .panel-body').append "<div class='text-error'><span class='folder-name'>#{projectPath}</span> Exited with error code: #{code}</div>"
     @setScroll()
