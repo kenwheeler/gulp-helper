@@ -6,7 +6,7 @@ module.exports =
 class GulpHelperView extends View
   processes = {}
   command = if process.platform == 'win32' then 'gulp' else '/usr/local/bin/gulp'
-  args = ['--color', 'watch']
+  args = ['watch', '--color']
   @content: ->
     @div class: "gulp-helper tool-panel panel-bottom", =>
       @div class: "panel-heading affix", 'Gulp Output'
