@@ -4,9 +4,10 @@
   "version": "4.0.0",
   "private": true,
   "description": "Runs gulp watch on your project directory and displays the output!",
-  "activationCommands": [
-    "gulp-helper:toggle"
-  ],
+  "activationCommands": {
+    "atom-workspace": ["gulp-helper:toggle"],
+    "atom-text-editor": ["gulp-helper:toggle"]
+  },
   "repository": "https://github.com/kenwheeler/gulp-helper",
   "license": "MIT",
   "engines": {
