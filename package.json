@@ -1,10 +1,10 @@
 {
   "name": "gulp-helper",
   "main": "./lib/gulp-helper",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "private": true,
   "description": "Runs gulp watch on your project directory and displays the output!",
-  "activationEvents": [
+  "activationCommands": [
     "gulp-helper:toggle"
   ],
   "repository": "https://github.com/kenwheeler/gulp-helper",
