@@ -50,7 +50,11 @@ class GulpHelperView extends View
         stderr = (code) => @gulpErr(code, projectPathName)
         exit = (code) => @gulpErr(code, projectPathName)
         # Run process and store in cache so we can exit later
-        processes[projectPath] = new BufferedProcess({command, args, options, stdout, stderr, exit})
+        newProcess = new BufferedProcess({command, args, options, stdout, stderr, exit})
+        newProcess.onWillThrowError (error) =>
+          @MessageArea.append "<div class='text-error'><span class='folder-name'>#{projectPathName}</span> Error Starting Gulp Process: #{error.error.message}</div>"
+          error.handle()
+        processes[projectPath] = newProcess;
 
 
 
