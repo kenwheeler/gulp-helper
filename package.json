@@ -7,9 +7,6 @@
   "activationCommands": {
     "atom-workspace": [
       "gulp-helper:toggle"
-    ],
-    "atom-text-editor": [
-      "gulp-helper:toggle"
     ]
   },
   "repository": "https://github.com/kenwheeler/gulp-helper",
