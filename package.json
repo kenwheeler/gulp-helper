@@ -1,12 +1,17 @@
 {
   "name": "gulp-helper",
   "main": "./lib/gulp-helper",
-  "version": "1.2.0",
+  "version": "4.1.0",
   "private": true,
   "description": "Runs gulp watch on your project directory and displays the output!",
-  "activationEvents": [
-    "gulp-helper:toggle"
-  ],
+  "activationCommands": {
+    "atom-workspace": [
+      "gulp-helper:toggle"
+    ],
+    "atom-text-editor": [
+      "gulp-helper:toggle"
+    ]
+  },
   "repository": "https://github.com/kenwheeler/gulp-helper",
   "license": "MIT",
   "engines": {
